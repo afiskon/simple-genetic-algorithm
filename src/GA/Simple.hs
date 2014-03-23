@@ -11,7 +11,7 @@ import System.Random
 import qualified Data.List as L
 import Control.Parallel.Strategies
 
--- | Chromosome representation
+-- | Chromosome interface
 class NFData a => Chromosome a where
     -- | Crossover function
     crossover :: RandomGen g => g -> a -> a -> ([a],g)
