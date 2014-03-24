@@ -25,7 +25,7 @@ runGA   :: (RandomGen g, Chromosome a)
         => g                        -- ^ Random number generator
         -> Int                      -- ^ Population size
         -> Double                   -- ^ Mutation probability [0, 1]
-        -> (g -> (a, g))            -- ^ Random chromosome generator (hint: use closures)
+        -> (g -> (a, g))            -- ^ Random chromosome generator (hint: use currying or closures)
         -> (a -> Int -> Bool)       -- ^ Stopping criteria, 1st arg - best chromosome, 2nd arg - generation number
         -> a                        -- ^ Best chromosome
 runGA gen ps mp rnd stopf =
@@ -44,7 +44,7 @@ runGA' gen pop ps mp stopf gnum =
 runGAIO :: Chromosome a
         => Int                      -- ^ Population size
         -> Double                   -- ^ Mutation probability [0, 1]
-        -> (StdGen -> (a, StdGen))  -- ^ Random chromosome generator (hint: use closures)
+        -> (StdGen -> (a, StdGen))  -- ^ Random chromosome generator (hint: use currying or closures)
         -> (a -> Int -> IO Bool)    -- ^ Stopping criteria, 1st arg - best chromosome, 2nd arg - generation number
         -> IO a                     -- ^ Best chromosome
 runGAIO ps mp rnd stopf = do
