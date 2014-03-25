@@ -48,9 +48,10 @@ randomSinInt gen =
                 ([], gen) [0..polynomialOrder]
     in (SinInt lst, gen')
 
+stopf :: SinInt -> Int -> IO Bool
 stopf best gnum = do
     let e = err best
-    putStrLn $ "Generation: " ++ printf "%02d" gnum ++ ", Error: " ++ printf "%.8f" e
+    _ <- printf "Generation: %02d, Error: %.8f\n" gnum e
     return $ e < 0.0002 || gnum > 20
 
 main = do
