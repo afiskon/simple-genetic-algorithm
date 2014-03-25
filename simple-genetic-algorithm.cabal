@@ -23,7 +23,7 @@ source-repository head
 library
   exposed-modules:     GA.Simple
   ghc-options:         -O2 -Wall -fno-warn-missing-signatures
-  build-depends:       base >=4.5 && < 4.7,
+  build-depends:       base >=4.5 && < 4.8,
                        random >= 1.0 && < 1.1,
                        parallel >= 3.2 && < 3.3
   hs-source-dirs:      src
@@ -32,7 +32,7 @@ library
 executable ga-sin-example
   ghc-options:         -O2 -Wall -fno-warn-missing-signatures -threaded -rtsopts
   main-is:             MainSin.hs
-  build-depends:       base >= 4.5 && < 4.7,
+  build-depends:       base >= 4.5 && < 4.8,
                        random >= 1.0 && < 1.1,
                        deepseq >= 1.3 && < 1.4,
                        parallel >= 3.2 && < 3.3
