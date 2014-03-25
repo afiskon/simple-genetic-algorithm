@@ -7,7 +7,7 @@ import Text.Printf
 import Data.List as L
 import Control.DeepSeq
 
-data SinInt = SinInt [Double]
+newtype SinInt = SinInt [Double]
 
 instance NFData SinInt where
     rnf (SinInt xs) = rnf xs `seq` ()

@@ -1,4 +1,4 @@
--- | Simple parallel genetic algorithm implementation.
+-- | [Проверка проверка] Simple parallel genetic algorithm implementation.
 module GA.Simple (
     Chromosome(..),
     runGA,
