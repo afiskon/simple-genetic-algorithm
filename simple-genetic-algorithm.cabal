@@ -18,7 +18,7 @@ cabal-version:       >=1.10
 
 source-repository head
     type:     git
-    location: git@github.com:afiskon/simple-genetic-algorithm.git
+    location: https://github.com/afiskon/simple-genetic-algorithm
 
 library
   exposed-modules:     GA.Simple
