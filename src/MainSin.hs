@@ -1,7 +1,4 @@
--- | Example: sin() function interpolation on [0, pi/2]
-module Main where
-
-import GA.Simple
+import AI.GeneticAlgorithm.Simple
 import System.Random
 import Text.Printf
 import Data.List as L
