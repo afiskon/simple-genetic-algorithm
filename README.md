@@ -5,7 +5,7 @@ Simple parallel genetic algorithm implementation in pure Haskell
 
 Sin() function interpolation example ( src/MainSin.hs ):
 
-```
+```Haskell
 import AI.GeneticAlgorithm.Simple
 import System.Random
 import Text.Printf
