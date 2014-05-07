@@ -21,7 +21,8 @@ instance Show SinInt where
     show (SinInt []) = "<empty SinInt>"
     show (SinInt (x:xs)) =
         let start = printf "%.5f" x
-            end = concat $ zipWith (\c p -> printf "%+.5f" c ++ "X^" ++ show p) xs [1 :: Int ..]
+            lst = [1 :: Int ..]
+            end = concat $ zipWith (\c p -> printf "%+.5f" c ++ "X^" ++ show p) xs lst
         in start ++ end
 
 polynomialOrder = 4 :: Int
