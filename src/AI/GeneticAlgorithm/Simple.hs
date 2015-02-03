@@ -133,8 +133,8 @@ runGAIO' pop ps mp stopf gnum = do
 -- | Generate zero generation. Use this function only if you are going to implement your own runGA.
 zeroGeneration  :: (Monad m,RandomGen g)
                 => RandT g m a         -- ^ Random chromosome generator (hint: use closures)
-                -> Int              -- ^ Population size
-                -> RandT g m [a]       -- ^ Zero generation and new RNG
+                -> Int                 -- ^ Population size
+                -> RandT g m [a]       -- ^ Zero generation 
 zeroGeneration rnd ps =
     replicateM ps rnd
 
@@ -144,7 +144,7 @@ nextGeneration  :: (Monad m,RandomGen g, Chromosome a)
                 => [a]              -- ^ Current generation
                 -> Int              -- ^ Population size
                 -> Double           -- ^ Mutation probability
-                -> RandT g m [a]             -- ^ Next generation ordered by fitness (best - first) and new RNG
+                -> RandT g m [a]    -- ^ Next generation ordered by fitness (best - first)
 nextGeneration pop ps mp = do
     gen <- getSplit
     let gens = L.unfoldr (Just . split) gen
@@ -157,9 +157,7 @@ nextGeneration pop ps mp = do
 nextGeneration' [] _ acc = return acc
 nextGeneration' ((p1,p2):ps) mp acc = do
     children0 <- crossover p1 p2
-    children1 <- foldM
-                             (\xs x -> mutate x mp >>= (\x'->return (x':xs)))
-                             [] children0
+    children1 <- mapM (`mutate` mp) children0
     nextGeneration' ps mp (children1 ++ acc)
 
 mutate :: (RandomGen g, Chromosome a) => a -> Double -> Rand g a
