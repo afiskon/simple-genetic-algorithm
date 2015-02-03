@@ -1,8 +1,9 @@
 import AI.GeneticAlgorithm.Simple
-import System.Random
 import Text.Printf
 import Data.List as L
 import Control.DeepSeq
+import Control.Monad.Random
+import Control.Monad
 
 newtype SinInt = SinInt [Double]
 
@@ -24,26 +25,23 @@ err (SinInt xs) =
     in maximum [ abs $ sin x - f x | x <- [0.0,0.001 .. pi/2]]
 
 instance Chromosome SinInt where
-    crossover g (SinInt xs) (SinInt ys) =
-        ( [ SinInt (L.zipWith (\x y -> (x+y)/2) xs ys) ], g)
+    crossover (SinInt xs) (SinInt ys) =
+        return [ SinInt (L.zipWith (\x y -> (x+y)/2) xs ys) ]
 
-    mutation g (SinInt xs) =
-        let (idx, g') = randomR (0, length xs - 1) g
-            (dx, g'') = randomR (-10.0, 10.0) g'
-            t = xs !! idx
+    mutation (SinInt xs) = do
+        idx <- getRandomR (0, length xs - 1)
+        dx  <- getRandomR (-10.0, 10.0)
+        let t = xs !! idx
             xs' = take idx xs ++ [t + t*dx] ++ drop (idx+1) xs
-        in (SinInt xs', g'')
+        return $ SinInt xs'
 
     fitness int =
         let max_err = 1000.0 in
         max_err - (min (err int) max_err)
 
-randomSinInt gen = 
-    let (lst, gen') =
-            L.foldl'
-                (\(xs, g) _ -> let (x, g') = randomR (-10.0,10.0) g in (x:xs,g') )
-                ([], gen) [0..polynomialOrder]
-    in (SinInt lst, gen')
+randomSinInt = do
+    lst <- replicateM polynomialOrder (getRandomR (-10.0,10.0))
+    return $ SinInt lst
 
 stopf :: SinInt -> Int -> IO Bool
 stopf best gnum = do

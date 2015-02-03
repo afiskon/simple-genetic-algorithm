@@ -2,7 +2,7 @@
 -- further documentation, see http://haskell.org/cabal/users-guide/
 
 name:                simple-genetic-algorithm
-version:             0.2.1.0
+version:             0.3.0.0
 synopsis:            Simple parallel genetic algorithm implementation
 description:         Simple parallel genetic algorithm implementation
 homepage:            http://eax.me/haskell-genetic-algorithm/
@@ -14,7 +14,7 @@ maintainer:          mail@eax.me
 category:            AI
 build-type:          Simple
 -- extra-source-files:  
-cabal-version:       >=1.10
+cabal-version:       >= 1.10
 
 source-repository head
     type:     git
@@ -23,9 +23,12 @@ source-repository head
 library
   exposed-modules:     AI.GeneticAlgorithm.Simple
   ghc-options:         -O2 -Wall -fno-warn-missing-signatures
-  build-depends:       base >=4.5 && < 4.8,
+  build-depends:       
+                       base >=4.5 && < 4.8,
                        random >= 1.0 && < 1.2,
-                       parallel >= 3.2 && < 3.3
+                       parallel >= 3.2 && < 3.3,
+                       MonadRandom >=0.2 && < 0.4,
+                       transformers >= 0.4
   hs-source-dirs:      src
   default-language:    Haskell2010
 
@@ -35,7 +38,9 @@ executable ga-sin-example
   build-depends:       base >= 4.5 && < 4.8,
                        random >= 1.0 && < 1.2,
                        deepseq >= 1.3 && < 1.4,
-                       parallel >= 3.2 && < 3.3
+                       parallel >= 3.2 && < 3.3,
+                       MonadRandom >=0.2 && < 0.4,
+                       transformers >= 0.4
   hs-source-dirs:      src
   default-language:    Haskell2010
 
