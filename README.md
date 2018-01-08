@@ -69,7 +69,7 @@ main = do
 
 For more details see:
 
-* http://hackage.haskell.org/package/simple-genetic-algorithm
-* http://hackage.haskell.org/package/simple-genetic-algorithm-mr
-* http://www.reddit.com/r/haskell/comments/217ulw/ann_simple_parallel_genetic_algorithm/
-* http://eax.me/haskell-genetic-algorithm/
+* https://hackage.haskell.org/package/simple-genetic-algorithm
+* https://hackage.haskell.org/package/simple-genetic-algorithm-mr
+* https://www.reddit.com/r/haskell/comments/217ulw/ann_simple_parallel_genetic_algorithm/
+* https://eax.me/haskell-genetic-algorithm/
