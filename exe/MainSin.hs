@@ -1,8 +1,8 @@
-import AI.GeneticAlgorithm.Simple
-import System.Random
-import Text.Printf
-import Data.List as L
-import Control.DeepSeq
+import           AI.GeneticAlgorithm.Simple
+import           Control.DeepSeq
+import           Data.List                  as L
+import           System.Random
+import           Text.Printf
 
 newtype SinInt = SinInt [Double]
 
@@ -16,7 +16,8 @@ instance Show SinInt where
             end = concat $ zipWith (\c p -> printf "%+.5f" c ++ "X^" ++ show p) xs [1 :: Int ..]
         in start ++ end
 
-polynomialOrder = 4 :: Int
+polynomialOrder :: Int
+polynomialOrder = 4
 
 err :: SinInt -> Double
 err (SinInt xs) =
@@ -36,9 +37,10 @@ instance Chromosome SinInt where
 
     fitness int =
         let max_err = 1000.0 in
-        max_err - (min (err int) max_err)
+        max_err - min (err int) max_err
 
-randomSinInt gen = 
+randomSinInt :: RandomGen g => g -> (SinInt, g)
+randomSinInt gen =
     let (lst, gen') =
             L.foldl'
                 (\(xs, g) _ -> let (x, g') = randomR (-10.0,10.0) g in (x:xs,g') )
@@ -51,6 +53,7 @@ stopf best gnum = do
     _ <- printf "Generation: %02d, Error: %.8f\n" gnum e
     return $ e < 0.0002 || gnum > 20
 
+main :: IO ()
 main = do
     int <- runGAIO 64 0.1 randomSinInt stopf
     putStrLn ""
